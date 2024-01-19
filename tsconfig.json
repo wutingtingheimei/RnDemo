@@ -1,3 +1,15 @@
 {
-  "extends": "@react-native/typescript-config/tsconfig.json"
+  "extends": "@react-native/typescript-config/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "./src" /* Base directory to resolve non-absolute module names. */,
+    "paths": {
+      "@/assets/*": ["assets/*"],
+      "@/components/*": ["components/*"],
+      "@/config/*": ["config/*"],
+      "@/models/*": ["models/*"],
+      "@/navigator/*": ["navigator/*"],
+      "@/pages/*": ["pages/*"],
+      "@/utils/*": ["utils/*"]
+    }
+  }
 }
