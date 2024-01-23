@@ -39,7 +39,7 @@ const Nav = memo(() => {
           component={Home}
           options={{
             headerShown: true,
-            tabBarIcon: ({color, size, focused}) => (
+            tabBarIcon: ({color, size}) => (
               <AntIcon name="home" color={color} size={size} />
             ),
           }}
@@ -67,6 +67,7 @@ const Nav = memo(() => {
       </Tab.Navigator>
     );
   };
+  // eslint-disable-next-line react/no-unstable-nested-components
   const RootRouteScreen = () => {
     return (
       <RootStack.Navigator>
@@ -83,13 +84,10 @@ const Nav = memo(() => {
   };
   return (
     <NavigationContainer theme={navTheme}>
-      {/* <Drawer.Navigator
-        drawerContent={props => <Wallet {...props} />}
-        screenOptions={{headerShown: false}}>
+      <Drawer.Navigator screenOptions={{headerShown: false}}>
         <Drawer.Screen name="TabNavigator" component={BottomTabNavigator} />
-      </Drawer.Navigator> */}
-      {/* <BottomTabNavigator /> */}
-      <RootRouteScreen />
+        <Drawer.Screen name="RootRouteScreen" component={RootRouteScreen} />
+      </Drawer.Navigator>
     </NavigationContainer>
   );
 });
