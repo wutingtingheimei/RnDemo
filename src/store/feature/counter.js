@@ -1,16 +1,18 @@
 import {createSlice} from '@reduxjs/toolkit';
-
+// import AsyncStorage from '@react-native-async-storage/async-storage';
 const counterSlice = createSlice({
   name: 'counter',
   initialState: {
-    counter: 0,
+    value: 1,
+    message: 'Hello World',
+    isDark: false,
   },
   reducers: {
     addNumber(state, {payload}) {
-      state.counter = state.counter + payload;
+      state.value = state.value + payload;
     },
     subNumber(state, {payload}) {
-      state.counter = state.counter - payload;
+      state.value = state.value - payload;
     },
 
     increment: state => {
@@ -29,9 +31,21 @@ const counterSlice = createSlice({
       state.value = payload;
       console.log('结束加载');
     },
+    changeMessage(state, {payload}) {
+      state.message = payload;
+    },
+    changeTheme(state, {payload}) {
+      console.log(payload, 'payload');
+      state.isDark = payload;
+      // storage使用不会
+      // try {
+      //   AsyncStorage.setItem('system-theme', payload);
+      // } catch (e) {
+      //   // saving error
+      // }
+    },
   },
 });
-
 export const {
   addNumber,
   subNumber,
@@ -40,6 +54,7 @@ export const {
   reset,
   beginLoading,
   finishLoading,
+  changeMessage,
+  changeTheme,
 } = counterSlice.actions;
-
-export default counterSlice.reducers;
+export default counterSlice;
