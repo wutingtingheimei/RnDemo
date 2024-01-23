@@ -86,10 +86,9 @@ const Nav = memo(() => {
       {/* <Drawer.Navigator
         drawerContent={props => <Wallet {...props} />}
         screenOptions={{headerShown: false}}>
-        <Drawer.Screen name="TabNavigator" component={BottomTabNavigator} />
+        <Drawer.Screen name="Roots" component={RootRouteScreen} />
       </Drawer.Navigator> */}
-      {/* <BottomTabNavigator /> */}
-      <RootRouteScreen />
+      <BottomTabNavigator />
     </NavigationContainer>
   );
 });
