@@ -29,6 +29,15 @@ const Nav = memo(() => {
   const Tab = createBottomTabNavigator();
   const Drawer = createDrawerNavigator();
   const RootStack = createNativeStackNavigator();
+  const LibraryNav = createNativeStackNavigator();
+  const LibraryStack = () => {
+    return (
+      <LibraryNav.Navigator screenOptions={{}}>
+        <LibraryNav.Screen name="Library" component={Library} />
+        <LibraryNav.Screen name="Detail" component={Detail} />
+      </LibraryNav.Navigator>
+    );
+  };
 
   // initialRouteName 首次加载显示的tab
   const BottomTabNavigator = () => {
@@ -55,8 +64,8 @@ const Nav = memo(() => {
           }}
         />
         <Tab.Screen
-          name="Library"
-          component={Library}
+          name="LibraryStack"
+          component={LibraryStack}
           options={{
             headerShown: false,
             tabBarIcon: ({color, size, focused}) => (
@@ -78,7 +87,8 @@ const Nav = memo(() => {
           name="BottomTabNavigator"
           component={BottomTabNavigator}
         />
-        <RootStack.Screen name="Detail" component={Detail} />
+        {/* 将detail写在这里，Tab都能够跳转到detail */}
+        {/* <RootStack.Screen name="Detail" component={Detail} /> */}
       </RootStack.Navigator>
     );
   };

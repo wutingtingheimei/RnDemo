@@ -48,8 +48,8 @@ const Home = memo(({route, navigation}) => {
       <View style={[s.row]}>
         <Pressable
           style={[sc.boxAct]}
-          onPress={() => navigation.navigate('Detail')}>
-          <Text style={[s.normalText, {color: '#FFF'}]}>Go to Detail</Text>
+          onPress={() => navigation.navigate('Setting')}>
+          <Text style={[s.normalText, {color: '#FFF'}]}>Go to Setting</Text>
         </Pressable>
         <Pressable style={[sc.boxLink]}>
           <Text style={[s.normalText]}>Link </Text>
