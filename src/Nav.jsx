@@ -85,8 +85,8 @@ const Nav = memo(() => {
   return (
     <NavigationContainer theme={navTheme}>
       <Drawer.Navigator screenOptions={{headerShown: false}}>
-        <Drawer.Screen name="TabNavigator" component={BottomTabNavigator} />
         <Drawer.Screen name="RootRouteScreen" component={RootRouteScreen} />
+        <Drawer.Screen name="Wallet" component={Wallet} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
