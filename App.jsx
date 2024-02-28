@@ -40,7 +40,6 @@ const App = () => {
   const [isLoading, setisLoading] = useState(false);
   const [selectedId, setSelectedId] = useState('');
 
-  console.log(Config.API_URL, 'Config');
   const renderItem = ({item}) => {
     const backgroundColor = item.id === selectedId ? '#6e3b6e' : '#f9c2ff';
     return (
@@ -52,7 +51,6 @@ const App = () => {
   };
   useEffect(() => {
     getUser({name: '123', id: 1});
-    console.log('数据');
     setTimeout(() => {
       setisLoading(true);
     }, 3000);
@@ -107,7 +105,6 @@ const App = () => {
 };
 
 const HandleClicker = () => {
-  console.log('2d2dd');
   // alert('点击');
 };
 

@@ -4,7 +4,15 @@ import {useStyle} from '../Style';
 import {useSelector, useDispatch, shallowEqual} from 'react-redux';
 // import {addNumber} from '../store/feature/counter';
 import {fetchHomeDataAction} from '../store/feature/home';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {DrawerActions} from '@react-navigation/native';
+const getData = async () => {
+  try {
+    const value = await AsyncStorage.getItem('system-theme');
+    console.log(value, 'home value');
+  } catch (e) {}
+};
+console.log(getData, 'getData');
 const Home = memo(({route, navigation}) => {
   const {
     sc,
@@ -23,6 +31,7 @@ const Home = memo(({route, navigation}) => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
+      title: '',
       headerTransparent: true, // 设置为true 则导航栏背景为透明
       headerRight: () => (
         <Pressable
@@ -33,6 +42,7 @@ const Home = memo(({route, navigation}) => {
     });
   });
   useEffect(() => {
+    getData();
     dispatch(fetchHomeDataAction());
   });
   return (
@@ -45,7 +55,7 @@ const Home = memo(({route, navigation}) => {
           <Text style={{color: emphasis}}>Emphasis HighLight</Text>
         </Text>
       </View>
-      <View style={[s.row]}>
+      <View style={[s.column]}>
         <Pressable
           style={[sc.boxAct]}
           onPress={() => navigation.navigate('Setting')}>
@@ -59,6 +69,16 @@ const Home = memo(({route, navigation}) => {
           <Text style={[s.normalText]}>
             {banners} {commands} {goods}
           </Text>
+        </Pressable>
+        <Pressable
+          style={[sc.boxAct]}
+          onPress={() => navigation.navigate('Pay')}>
+          <Text style={[s.normalText]}>OPen Modal</Text>
+        </Pressable>
+        <Pressable
+          style={[sc.boxAct]}
+          onPress={() => navigation.navigate('Pay')}>
+          <Text style={[s.normalText]}>Go To Pay</Text>
         </Pressable>
       </View>
     </SafeAreaView>

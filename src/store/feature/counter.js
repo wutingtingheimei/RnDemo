@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const counterSlice = createSlice({
   name: 'counter',
   initialState: {
@@ -37,6 +37,12 @@ const counterSlice = createSlice({
     changeTheme(state, {payload}) {
       console.log(payload, 'payload');
       state.isDark = payload;
+      const storeData = async () => {
+        try {
+          await AsyncStorage.setItem('system-theme', payload);
+        } catch (e) {}
+      };
+      console.log(storeData, 'storeData');
       // storage使用不会
       // try {
       //   AsyncStorage.setItem('system-theme', payload);

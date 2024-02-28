@@ -1,15 +1,24 @@
 {
   "extends": "@react-native/typescript-config/tsconfig.json",
+  // "compilerOptions": {
+  //   "jsx": "react",
+  //   "baseUrl": "./src" /* Base directory to resolve non-absolute module names. */,
+  //   "paths": {
+  //     "@/*": ["./*"]
+  //     // "@/assets/*": ["assets/*"],
+  //     // "@/components/*": ["components/*"],
+  //     // "@/config/*": ["config/*"],
+  //     // "@/models/*": ["models/*"],
+  //     // "@/navigator/*": ["navigator/*"],
+  //     // "@/pages/*": ["pages/*"],
+  //     // "@/utils/*": ["utils/*"]
+  //   }
+  // }
   "compilerOptions": {
-    "baseUrl": "./src" /* Base directory to resolve non-absolute module names. */,
+    "jsx": "react",
+    "baseUrl": "./src",
     "paths": {
-      "@/assets/*": ["assets/*"],
-      "@/components/*": ["components/*"],
-      "@/config/*": ["config/*"],
-      "@/models/*": ["models/*"],
-      "@/navigator/*": ["navigator/*"],
-      "@/pages/*": ["pages/*"],
-      "@/utils/*": ["utils/*"]
+      "@/*": ["./*"]
     }
   }
 }

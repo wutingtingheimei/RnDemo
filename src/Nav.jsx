@@ -14,6 +14,7 @@ import AntIcon from 'react-native-vector-icons/AntDesign';
 import Wallet from './screens/Wallet';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Detail from './screens/Detail';
+import Pay from './screens/Pay';
 const Nav = memo(() => {
   const {NavColors, isDark} = useStyle();
   const theme = isDark ? DarkTheme : DefaultTheme;
@@ -38,16 +39,29 @@ const Nav = memo(() => {
       </LibraryNav.Navigator>
     );
   };
-
+  const HomeNav = createNativeStackNavigator();
+  const HomeStack = () => {
+    return (
+      <HomeNav.Navigator screenOptions={{}}>
+        <HomeNav.Screen name="Home" component={Home} />
+        {/* 弹窗  presentation: fullScreenModal 在苹果机型上面是全屏弹窗，并且在iphone上modal是把底部的tab遮挡的， 而Android无法遮挡底部的tab */}
+        <HomeNav.Screen
+          name="Pay"
+          component={Pay}
+          options={{presentation: 'modal'}}
+        />
+      </HomeNav.Navigator>
+    );
+  };
   // initialRouteName 首次加载显示的tab
   const BottomTabNavigator = () => {
     return (
-      <Tab.Navigator initialRouteName="Home">
+      <Tab.Navigator initialRouteName="HomeStack">
         <Tab.Screen
-          name="Home"
-          component={Home}
+          name="HomeStack"
+          component={HomeStack}
           options={{
-            headerShown: true,
+            headerShown: false,
             tabBarIcon: ({color, size}) => (
               <AntIcon name="home" color={color} size={size} />
             ),
@@ -88,7 +102,7 @@ const Nav = memo(() => {
           component={BottomTabNavigator}
         />
         {/* 将detail写在这里，Tab都能够跳转到detail */}
-        {/* <RootStack.Screen name="Detail" component={Detail} /> */}
+        <RootStack.Screen name="Detail" component={Detail} />
       </RootStack.Navigator>
     );
   };

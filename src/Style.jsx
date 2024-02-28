@@ -1,6 +1,6 @@
 import {Dimensions, Platform, StyleSheet} from 'react-native';
 import {shallowEqual, useSelector} from 'react-redux';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 // Dimensions.get('window').width; //响应式
 // 获取屏幕的大小
 const ScreenSizes = Dimensions.get('window');
@@ -26,6 +26,7 @@ export {
   height as ScreenHeight,
   width as ScreenWidth,
 };
+
 export const useStyle = () => {
   const {isDark} = useSelector(
     state => ({
@@ -76,11 +77,16 @@ export const useStyle = () => {
       justifyContent: 'space-between',
       alignItems: 'center',
     },
+    column: {
+      flexDirection: 'column',
+      gap: scm,
+    },
     margin: {margin: cm},
     marginL: {marginLeft: cm},
     marginR: {marginRight: cm},
     padding: {padding: cm},
     radius: {borderRadius: cm},
+    textCenter: {textAlign: 'center'},
     centered: {justifyContent: 'center', alignItems: 'center'},
     normalText: {fontSize: cm, color: front},
     subText: {color: sub, fontSize: cm - 2},
@@ -89,7 +95,7 @@ export const useStyle = () => {
     subTitleText: {color: sub, fontSize: mcm - 4},
     importantText: {color: emphasis, fontSize: cm},
     smallText: {fontSize: cm - 4, color: sub},
-    box: {backgroundColor: mid, borderRadius: mcm, padding: mcm},
+    box: {backgroundColor: mid, padding: scm, borderRadius: scm},
     shadow: {
       elevation: 16, // android only
       shadowColor: shadow,
