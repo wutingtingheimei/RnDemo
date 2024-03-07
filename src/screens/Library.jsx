@@ -50,7 +50,7 @@ const Library = memo(({navigation}) => {
   const {sc, s} = useStyle();
   const {message} = useSelector(
     state => ({
-      message: state.count.message,
+      message: state.counter.message,
     }),
     shallowEqual,
   );

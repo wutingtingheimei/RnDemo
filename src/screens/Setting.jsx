@@ -6,7 +6,7 @@ import {changeTheme} from 'store/feature/counter';
 const Setting = memo(() => {
   const {s, sc, isDark} = useStyle();
   // const {isDark} = useSelector(state => ({
-  //   isDark: state.count.isDark,
+  //   isDark: state.counter.isDark,
   // }));
   const [theme, setTheme] = useState(isDark);
   const dispatch = useDispatch();

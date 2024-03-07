@@ -6,13 +6,10 @@ import {useSelector, useDispatch, shallowEqual} from 'react-redux';
 import {fetchHomeDataAction} from '../store/feature/home';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {DrawerActions} from '@react-navigation/native';
-const getData = async () => {
-  try {
-    const value = await AsyncStorage.getItem('system-theme');
-    console.log(value, 'home value');
-  } catch (e) {}
-};
-console.log(getData, 'getData');
+import {useTranslation} from 'react-i18next';
+import {Button} from 'react-native';
+import {setLanguage} from '@/store/feature/locales';
+import {changeMessage} from '@/store/feature/counter';
 const Home = memo(({route, navigation}) => {
   const {
     sc,
@@ -27,8 +24,14 @@ const Home = memo(({route, navigation}) => {
     }),
     shallowEqual,
   );
+  const currentLanguage = useSelector(state => state.language);
+  console.log(currentLanguage, 'currentLanguage');
   const dispatch = useDispatch();
-
+  const {i18n, t} = useTranslation();
+  const handleLanguageChange = language => {
+    // 问题在这里
+    dispatch(setLanguage(language));
+  };
   useLayoutEffect(() => {
     navigation.setOptions({
       title: '',
@@ -42,13 +45,16 @@ const Home = memo(({route, navigation}) => {
     });
   });
   useEffect(() => {
-    getData();
+    i18n.changeLanguage(currentLanguage);
     dispatch(fetchHomeDataAction());
-  });
+  }, [currentLanguage]);
   return (
     <SafeAreaView style={[s.container, s.centered, s.shadow]}>
+      <Button title="English" onPress={() => handleLanguageChange('en')} />
+      <Button title="Jap" onPress={() => handleLanguageChange('jp')} />
+      <Button title="Chinese" onPress={() => handleLanguageChange('cn')} />
       <View style={[sc.card]}>
-        <Text style={[s.titleText]}>Home Title</Text>
+        <Text style={[s.titleText]}>Home Title {t('greeting')}</Text>
         <Text style={[s.subText]}>sub Title</Text>
         <Text style={[s.normalText]}>
           normal content

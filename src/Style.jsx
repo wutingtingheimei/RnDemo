@@ -29,9 +29,7 @@ export {
 
 export const useStyle = () => {
   const {isDark} = useSelector(
-    state => ({
-      isDark: state.count.isDark,
-    }),
+    state => ({isDark: state.counter.isDark}),
     shallowEqual,
   );
   const Colors = isDark

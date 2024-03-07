@@ -1,5 +1,6 @@
 import React, {memo} from 'react';
 import Home from './screens/Home';
+
 import Setting from './screens/Setting';
 import Library from './screens/Library';
 import {NavigationContainer} from '@react-navigation/native';
@@ -106,6 +107,7 @@ const Nav = memo(() => {
       </RootStack.Navigator>
     );
   };
+
   return (
     <NavigationContainer theme={navTheme}>
       <Drawer.Navigator screenOptions={{headerShown: false}}>
