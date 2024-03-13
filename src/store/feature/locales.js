@@ -6,6 +6,7 @@ const languageSlice = createSlice({
   reducers: {
     setLanguage(state, {payload}) {
       state = payload;
+      // 这里必须返回一个默认值， 不然就会有问题
       return state;
     },
   },

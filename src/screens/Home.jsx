@@ -1,5 +1,5 @@
 import React, {memo, useCallback, useEffect, useLayoutEffect} from 'react';
-import {SafeAreaView, View, Text, Pressable} from 'react-native';
+import {SafeAreaView, View, Text, Pressable, Dimensions} from 'react-native';
 import {useStyle} from '../Style';
 import {useSelector, useDispatch, shallowEqual} from 'react-redux';
 // import {addNumber} from '../store/feature/counter';
@@ -10,6 +10,10 @@ import {useTranslation} from 'react-i18next';
 import {Button} from 'react-native';
 import {setLanguage} from '@/store/feature/locales';
 import {changeMessage} from '@/store/feature/counter';
+import {createWallet} from 'react-native-web3-wallet';
+import {ScrollView} from 'react-native-gesture-handler';
+import Swiper from 'react-native-swiper';
+
 const Home = memo(({route, navigation}) => {
   const {
     sc,
@@ -32,6 +36,18 @@ const Home = memo(({route, navigation}) => {
     // 问题在这里
     dispatch(setLanguage(language));
   };
+  const password = 'twttewqdbw';
+  const handleCreateWallet = () => {
+    // 创建钱包;
+    createWallet('twttewqdbw')
+      .then(res => {
+        console.log(res, 'res');
+      })
+      .catch(err => {
+        console.log(err, 'err');
+      });
+  };
+
   useLayoutEffect(() => {
     navigation.setOptions({
       title: '',
@@ -47,9 +63,21 @@ const Home = memo(({route, navigation}) => {
   useEffect(() => {
     i18n.changeLanguage(currentLanguage);
     dispatch(fetchHomeDataAction());
+    dispatch(changeMessage(t('hello')));
   }, [currentLanguage]);
   return (
     <SafeAreaView style={[s.container, s.centered, s.shadow]}>
+      <Swiper showsButtons={true} height={200} autoplay={true}>
+        <View style={{backgroundColor: 'blue', color: 'red'}}>
+          <Text>Hello Swiper</Text>
+        </View>
+        <View style={{backgroundColor: 'blue', color: 'red'}}>
+          <Text>Beautiful</Text>
+        </View>
+        <View style={{backgroundColor: 'blue', color: 'red'}}>
+          <Text>And simple</Text>
+        </View>
+      </Swiper>
       <Button title="English" onPress={() => handleLanguageChange('en')} />
       <Button title="Jap" onPress={() => handleLanguageChange('jp')} />
       <Button title="Chinese" onPress={() => handleLanguageChange('cn')} />
@@ -61,32 +89,52 @@ const Home = memo(({route, navigation}) => {
           <Text style={{color: emphasis}}>Emphasis HighLight</Text>
         </Text>
       </View>
-      <View style={[s.column]}>
-        <Pressable
-          style={[sc.boxAct]}
-          onPress={() => navigation.navigate('Setting')}>
-          <Text style={[s.normalText, {color: '#FFF'}]}>Go to Setting</Text>
-        </Pressable>
-        <Pressable style={[sc.boxLink]}>
-          <Text style={[s.normalText]}>Link </Text>
-        </Pressable>
 
-        <Pressable style={[sc.boxAct]}>
-          <Text style={[s.normalText]}>
-            {banners} {commands} {goods}
-          </Text>
-        </Pressable>
-        <Pressable
-          style={[sc.boxAct]}
-          onPress={() => navigation.navigate('Pay')}>
-          <Text style={[s.normalText]}>OPen Modal</Text>
-        </Pressable>
-        <Pressable
-          style={[sc.boxAct]}
-          onPress={() => navigation.navigate('Pay')}>
-          <Text style={[s.normalText]}>Go To Pay</Text>
-        </Pressable>
-      </View>
+      <ScrollView>
+        <View style={[s.column]}>
+          <Pressable
+            style={[sc.boxAct]}
+            onPress={() => navigation.navigate('Setting')}>
+            <Text style={[s.normalText, {color: '#FFF'}]}>Go to Setting</Text>
+          </Pressable>
+          <Pressable style={[sc.boxLink]}>
+            <Text style={[s.normalText]}>Link </Text>
+          </Pressable>
+
+          <Pressable style={[sc.boxAct]}>
+            <Text style={[s.normalText]}>
+              {banners} {commands} {goods}
+            </Text>
+          </Pressable>
+          <Pressable
+            style={[sc.boxAct]}
+            onPress={() => navigation.navigate('Pay')}>
+            <Text style={[s.normalText]}>OPen Modal</Text>
+          </Pressable>
+          <Pressable
+            style={[sc.boxAct]}
+            onPress={() => navigation.navigate('Pay')}>
+            <Text style={[s.normalText]}>Go To Pay</Text>
+          </Pressable>
+          {/*           
+          <Pressable
+            style={tw.style(
+              'h-64 w-40 bg-blue-500 rounded-xl p-4 m-1 items-center justify-center shadow-lg',
+            )}
+            onPress={handleCreateWallet}>
+            <Text style={tw.style('text-white text-lg font-bold my-4')}>
+              创建钱包
+            </Text>
+          </Pressable> */}
+          <Pressable
+            className="mt-10 px-2 bg-black border-cyan-100 border-solid border-2 rounded-lg"
+            onPress={handleCreateWallet}>
+            <Text className="text-2xl text-[#028833] dark:text-white">
+              创建钱包
+            </Text>
+          </Pressable>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 });

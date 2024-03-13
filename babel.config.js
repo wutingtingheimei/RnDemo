@@ -43,5 +43,6 @@ module.exports = {
       },
     ],
     'react-native-reanimated/plugin',
+    'nativewind/babel',
   ],
 };
